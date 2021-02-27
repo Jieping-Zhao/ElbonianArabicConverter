@@ -133,6 +133,12 @@ public class ConverterTests {
         assertEquals(c.isElbonian(c.getNumber()), true);
     }
 
+    @Test
+    public void isNotFormed1() throws MalformedNumberException, ValueOutOfBoundsException {
+        ElbonianArabicConverter c = new ElbonianArabicConverter("dDcC");
+        assertEquals(c.isNotFormed(c.getNumber()), true);
+    }
+
 //    @Test
 //    public void ElbonianToArabicSampleTest() throws MalformedNumberException, ValueOutOfBoundsException {
 //        ElbonianArabicConverter converter = new ElbonianArabicConverter("1");

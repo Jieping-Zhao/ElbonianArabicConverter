@@ -7,6 +7,7 @@ import converter.exceptions.MalformedNumberException;
 import converter.exceptions.ValueOutOfBoundsException;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -43,6 +44,58 @@ public class ElbonianArabicConverter {
         // TODO check to see if the number is valid, then set it equal to the string
         this.number = number;
     }
+
+    public boolean isNotFormed(String number) {
+        boolean arabic = false;
+        boolean elbonian = false;
+        String[] s = number.split(" ", -2);
+        ArrayList<Character> validChar = new ArrayList<>();
+        validChar.add('D');
+        validChar.add('M');
+        validChar.add('C');
+        validChar.add('L');
+        validChar.add('X');
+        validChar.add('V');
+        validChar.add('I');
+        validChar.add('d');
+        validChar.add('m');
+        validChar.add('c');
+        validChar.add('l');
+        validChar.add('x');
+        validChar.add('v');
+        validChar.add('i');
+
+        ArrayList<Character> validNum = new ArrayList<>();
+        validNum.add('0');
+        validNum.add('1');
+        validNum.add('2');
+        validNum.add('3');
+        validNum.add('4');
+        validNum.add('5');
+        validNum.add('6');
+        validNum.add('7');
+        validNum.add('8');
+        validNum.add('9');
+
+        if (s.length>1) {
+            return false;
+        } else {
+            for (int i = 0; i < s.length; i++) {
+                if (!validChar.contains(s[i]) && !validNum.contains(s[i])) return false;
+                if (validChar.contains(s[i])) elbonian = true;
+                if (validNum.contains(s[i])) arabic = true;
+            }
+            if (elbonian=arabic) return false;
+        }
+
+        return true;
+    }
+
+    public boolean ElbonianOrArabic(String number) {
+        return true;
+    }
+
+
 
     public boolean isElbonian(String number) {
         int counter = 0;
