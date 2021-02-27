@@ -41,13 +41,15 @@ public class ElbonianArabicConverter {
      */
     public ElbonianArabicConverter(String number) throws MalformedNumberException, ValueOutOfBoundsException {
         // TODO check to see if the number is valid, then set it equal to the string
-        if (!this.isNotFormed(number)) {
-            throw new MalformedNumberException("Not Valid");
+        try {
+            this.isNotFormed(number);
+        } catch (MalformedNumberException e) {
+            System.out.println("Invalid");
         }
         this.number = number;
     }
 
-    public boolean isNotFormed(String number) {
+    public boolean isNotFormed(String number) throws MalformedNumberException {
         number = number.trim();
         boolean arabic = false;
         boolean elbonian = false;
@@ -81,23 +83,37 @@ public class ElbonianArabicConverter {
         validNum.add('9');
 
         if (s.length>1) {
-            return false;
+            throw new MalformedNumberException("Invalid");
         } else {
             String ss = s[0];
 
             for (int i = 0; i < ss.length(); i++) {
-                if (!validChar.contains(ss.charAt(i)) && !validNum.contains(ss.charAt(i))) return false;
+                if (!validChar.contains(ss.charAt(i)) && !validNum.contains(ss.charAt(i))) throw new MalformedNumberException("Invalid");;
                 if (validChar.contains(ss.charAt(i))) elbonian = true;
                 if (validNum.contains(ss.charAt(i))) arabic = true;
             }
-            if (elbonian=arabic) return false;
+            if (elbonian=arabic) throw new MalformedNumberException("Invalid");;
         }
 
         return true;
     }
 
     public boolean ElbonianOrArabic(String number) {
-        return true;
+        number.trim();
+        if (number.charAt(0)=='0'||
+                number.charAt(0)=='1'||
+                number.charAt(0)=='2'||
+                number.charAt(0)=='3'||
+                number.charAt(0)=='4'||
+                number.charAt(0)=='5'||
+                number.charAt(0)=='6'||
+                number.charAt(0)=='7'||
+                number.charAt(0)=='8'||
+                number.charAt(0)=='9') {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

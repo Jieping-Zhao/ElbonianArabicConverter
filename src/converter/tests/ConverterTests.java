@@ -185,10 +185,11 @@ public class ConverterTests {
 //        assertEquals(converter.toArabic(), 1);
 //    }
 //
-//    @Test(expected = MalformedNumberException.class)
-//    public void malformedNumberTest() throws MalformedNumberException, ValueOutOfBoundsException {
-//        throw new MalformedNumberException("TEST");
-//    }
+    @Test(expected = MalformedNumberException.class)
+    public void malformedNumberTest() throws MalformedNumberException, ValueOutOfBoundsException {
+        ElbonianArabicConverter c = new ElbonianArabicConverter("1d,DcC");
+        c.isNotFormed(c.getNumber());
+    }
 //
 //    @Test(expected = ValueOutOfBoundsException.class)
 //    public void valueOutOfBoundsTest() throws MalformedNumberException, ValueOutOfBoundsException {
