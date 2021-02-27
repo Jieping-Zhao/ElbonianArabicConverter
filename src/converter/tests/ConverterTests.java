@@ -159,6 +159,18 @@ public class ConverterTests {
         assertEquals(c.isNotFormed(c.getNumber()), false);
     }
 
+    @Test
+    public void isNotFormed6() throws MalformedNumberException, ValueOutOfBoundsException {
+        ElbonianArabicConverter c = new ElbonianArabicConverter("ZdDcC");
+        assertEquals(c.isNotFormed(c.getNumber()), false);
+    }
+
+    @Test
+    public void isNotFormed7() throws MalformedNumberException, ValueOutOfBoundsException {
+        ElbonianArabicConverter c = new ElbonianArabicConverter("1d,DcC");
+        assertEquals(c.isNotFormed(c.getNumber()), false);
+    }
+
 //    @Test
 //    public void ElbonianToArabicSampleTest() throws MalformedNumberException, ValueOutOfBoundsException {
 //        ElbonianArabicConverter converter = new ElbonianArabicConverter("1");

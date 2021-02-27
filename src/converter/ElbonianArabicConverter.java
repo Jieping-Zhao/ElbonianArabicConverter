@@ -41,10 +41,14 @@ public class ElbonianArabicConverter {
      */
     public ElbonianArabicConverter(String number) throws MalformedNumberException, ValueOutOfBoundsException {
         // TODO check to see if the number is valid, then set it equal to the string
+        if (!this.isNotFormed(number)) {
+            throw new MalformedNumberException("Not Valid");
+        }
         this.number = number;
     }
 
     public boolean isNotFormed(String number) {
+        number = number.trim();
         boolean arabic = false;
         boolean elbonian = false;
         String[] s = number.split(" ", -2);
@@ -80,7 +84,7 @@ public class ElbonianArabicConverter {
             return false;
         } else {
             String ss = s[0];
-            ss.trim();
+
             for (int i = 0; i < ss.length(); i++) {
                 if (!validChar.contains(ss.charAt(i)) && !validNum.contains(ss.charAt(i))) return false;
                 if (validChar.contains(ss.charAt(i))) elbonian = true;
