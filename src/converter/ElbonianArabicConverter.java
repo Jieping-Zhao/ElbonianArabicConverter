@@ -18,9 +18,12 @@ import java.util.LinkedList;
 public class ElbonianArabicConverter {
 
     // A string that holds the number (Elbonian or Arabic) you would like to convert
-    private String EA;
+
     private final String number;
 
+    public String getNumber() {
+        return this.number;
+    }
 
 
     /**
@@ -41,46 +44,128 @@ public class ElbonianArabicConverter {
         this.number = number;
     }
 
-    /*
-    1. no more than three times, done
-    2. in the right order
-    3. same letters are next to each other, done
-    4. d, l, v only once
-     */
     public boolean isElbonian(String number) {
         int counter = 0;
         int counterDLV = 0;
+
         LinkedList<Character> word = new LinkedList<Character>();
 
         for (int i = 0; i < number.length(); i++) {
-            if (!word.contains(number.charAt(i))) {
-                word.addLast(number.charAt(i));
-                counter = 1;
-            } else {
-                if (word.getLast()=='M') {
-                    if (word.contains('C')||word.contains('X')||word.contains('I')) {
-                        return false;
-                    }
+            if (Character.isLowerCase(number.charAt(i))) {
+                if (i == (number.length()-1)) {
+                    return false;
                 }
-                if (word.getLast()=='D') {
-                    if (word.contains('X')||word.contains('I')) {
-                        return false;
+                else {
+                    if (number.charAt(i)!=Character.toLowerCase(number.charAt(i+1))) return false;
+                    if (i<number.length()-2) {
+                        if (number.charAt(i)==Character.toLowerCase(number.charAt(i+2))) return false;
+                        if (number.charAt(i)=='d') {
+                            if (number.charAt(i+2)=='C') return false;
+                        }
+                        if (number.charAt(i)=='l') {
+                            if (number.charAt(i+2)=='X') return false;
+                        }
+                        if (number.charAt(i)=='v') {
+                            if (number.charAt(i+2)=='I') return false;
+                        }
+                        if (number.charAt(i)=='m') {
+                            if (number.charAt(i+2)=='D'||number.charAt(i+2)=='C') return false;
+                        }
+                        if (number.charAt(i)=='c') {
+                            if (number.charAt(i+2)=='L'||number.charAt(i+2)=='X') return false;
+                        }
+                        if (number.charAt(i)=='x') {
+                            if (number.charAt(i+2)=='V'||number.charAt(i+2)=='I') return false;
+                        }
                     }
-                }
-                if (word.getLast()=='X') {
-                    if (word.contains('I')) {
-                        return false;
-                    }
-                }
-                //word.addLast(number.charAt(i));
-                if (!(number.charAt(i)==word.getLast())) return false;
-                counter++;
-                if (counter > 3) return false;
 
+                }
+
+                i++;
             }
+            else {
+                if (!word.contains(number.charAt(i))) {
+                    word.addLast(number.charAt(i));
+                    counter = 1;
+                    if (word.getLast() == 'M') {
+                        if (word.contains('D') || word.contains('C') || word.contains('L') ||
+                                word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'D') {
+                        if (word.contains('C') || word.contains('L') ||
+                                word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'C') {
+                        if (word.contains('L') ||
+                                word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'L') {
+                        if (word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'X') {
+                        if (word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'V') {
+                        if (word.contains('I')) {
+                            return false;
+                        }
+                    }
+                } else {
+                    if (number.charAt(i)== 'D'|| number.charAt(i)== 'V' || number.charAt(i)== 'L') {
+                        return false;
+                    }
+                    if (word.getLast() == 'M') {
+                        if (word.contains('D') || word.contains('C') || word.contains('L') ||
+                                word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'D') {
+                        if (word.contains('C') || word.contains('L') ||
+                                word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'C') {
+                        if (word.contains('L') ||
+                                word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'L') {
+                        if (word.contains('X') || word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'X') {
+                        if (word.contains('V') || word.contains('I')) {
+                            return false;
+                        }
+                    }
+                    if (word.getLast() == 'V') {
+                        if (word.contains('I')) {
+                            return false;
+                        }
+                    }
 
+                    //word.addLast(number.charAt(i));
+                    if (!(number.charAt(i) == word.getLast())) return false;
+                    counter++;
+                    if (counter > 3) return false;
+
+                }
+            }
         }
-
 
 
         return true;
