@@ -79,10 +79,12 @@ public class ElbonianArabicConverter {
         if (s.length>1) {
             return false;
         } else {
-            for (int i = 0; i < s.length; i++) {
-                if (!validChar.contains(s[i]) && !validNum.contains(s[i])) return false;
-                if (validChar.contains(s[i])) elbonian = true;
-                if (validNum.contains(s[i])) arabic = true;
+            String ss = s[0];
+            ss.trim();
+            for (int i = 0; i < ss.length(); i++) {
+                if (!validChar.contains(ss.charAt(i)) && !validNum.contains(ss.charAt(i))) return false;
+                if (validChar.contains(ss.charAt(i))) elbonian = true;
+                if (validNum.contains(ss.charAt(i))) arabic = true;
             }
             if (elbonian=arabic) return false;
         }
