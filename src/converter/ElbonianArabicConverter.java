@@ -41,13 +41,32 @@ public class ElbonianArabicConverter {
         this.number = number;
     }
 
+    /*
+    1. no more than three times, done
+    2. in the right order
+    3. same letters are next to each other
+    4. d, l, v only once
+     */
     public boolean isElbonian(String number) {
         int counter = 0;
+        int counterDLV = 0;
         LinkedList<Character> word = new LinkedList<Character>();
+
         for (int i = 0; i < number.length(); i++) {
-            word.addLast(number.charAt(i));
+            if (!word.contains(number.charAt(i))) {
+                word.addLast(number.charAt(i));
+                counter = 1;
+            } else {
+                //word.addLast(number.charAt(i));
+                counter++;
+                if (counter > 3) return false;
+
+            }
+
         }
-        
+
+
+
         return false;
     }
     /**
