@@ -44,7 +44,7 @@ public class ElbonianArabicConverter {
     /*
     1. no more than three times, done
     2. in the right order
-    3. same letters are next to each other
+    3. same letters are next to each other, done
     4. d, l, v only once
      */
     public boolean isElbonian(String number) {
@@ -57,7 +57,23 @@ public class ElbonianArabicConverter {
                 word.addLast(number.charAt(i));
                 counter = 1;
             } else {
+                if (word.getLast()=='M') {
+                    if (word.contains('C')||word.contains('X')||word.contains('I')) {
+                        return false;
+                    }
+                }
+                if (word.getLast()=='D') {
+                    if (word.contains('X')||word.contains('I')) {
+                        return false;
+                    }
+                }
+                if (word.getLast()=='X') {
+                    if (word.contains('I')) {
+                        return false;
+                    }
+                }
                 //word.addLast(number.charAt(i));
+                if (!(number.charAt(i)==word.getLast())) return false;
                 counter++;
                 if (counter > 3) return false;
 
@@ -67,7 +83,7 @@ public class ElbonianArabicConverter {
 
 
 
-        return false;
+        return true;
     }
     /**
      * Converts the number to an Arabic numeral or returns the current value as an int if it is already
